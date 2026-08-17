@@ -23,5 +23,3 @@ def test_pipeline_handles_misssing_value():
     pre = preprocessor()
     transformed = pre.fit_transform(df)
     assert transformed.shape[1] == 19
-
-
