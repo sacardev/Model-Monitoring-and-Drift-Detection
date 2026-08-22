@@ -22,4 +22,3 @@ def validate_schema(df):
             raise ValueError(f"Column '{col}' not found in the dataset.")
         if df[col].dtype != dtype:
             raise TypeError(f"Column '{col}' has dtype {df[col].dtype} but expected {dtype}.")
-    

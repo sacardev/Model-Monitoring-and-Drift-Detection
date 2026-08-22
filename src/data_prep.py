@@ -39,7 +39,7 @@ def preprocessor() -> ColumnTransformer:
         ('imputer', SimpleImputer(strategy='median')),
         ('scaler', StandardScaler())
     ])
-
+    
     cate_pipeline = Pipeline([
         ('imputer', SimpleImputer(strategy='most_frequent')),
         ('onehot', OneHotEncoder(handle_unknown='ignore'))
