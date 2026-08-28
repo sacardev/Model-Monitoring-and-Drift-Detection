@@ -27,8 +27,8 @@ class DriftReport:
 
     def to_dict(self) -> dict:
         return {
-            "dataset_drifted": self.dataset_drifted(),
-            "drift_share": self.drift_share(),
+            "dataset_drifted": self.dataset_drifted,
+            "drift_share": self.drift_share,
             "feature_result": [r.__dict__ for r in self.feature_result]
         }
 
