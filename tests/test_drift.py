@@ -73,3 +73,31 @@ def test_evidently_drift_report(tmp_path):
     report = generate_drift_report(ref, curr, output_html_path=html_path)
     assert report is not None
     assert html_path.exists()
+
+
+def test_inject_drift():
+    from scripts.simulate_drift import inject_drift
+
+    df = pd.DataFrame({
+        "num": [10.0, 20.0, 30.0, 40.0],
+        "cat": ["A", "A", "B", "B"],
+    })
+    drifted = inject_drift(
+        df,
+        numerical_col="num",
+        categorical_col="cat",
+        source_category="A",
+        target_category="B",
+        num_scale=2.0,
+        num_shift=5.0,
+        cat_flip_prob=1.0,
+        seed=42,
+    )
+
+    # Verify numerical shift: 10 * 2 + 5 = 25
+    assert drifted["num"].iloc[0] == 25.0
+    # Original should be untouched (inplace=False)
+    assert df["num"].iloc[0] == 10.0
+    # Categorical flip with prob=1.0 should flip all source categories
+    assert (drifted["cat"] == "B").all()
+
