@@ -5,29 +5,7 @@ from sklearn.pipeline import Pipeline
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, f1_score
 
-from src.data_prep import load_data, preprocessor
-
-target_col = 'Exited'
-
-cate_cols = [
-        'Geography', 
-        'Gender', 
-        'Card Type'
-    ]
-
-num_cols = [
-    'CreditScore', 
-    'Age', 
-    'Tenure', 
-    'Balance', 
-    'NumOfProducts', 
-    'HasCrCard', 
-    'IsActiveMember', 
-    'EstimatedSalary', 
-    'Complain', 
-    'Satisfaction Score', 
-    'Point Earned'
-    ]
+from src.data_prep import load_data, preprocessor, num_cols, cate_cols, target_col
 
 def main():
     df = load_data('data/raw/customer_churn.csv')

@@ -10,18 +10,16 @@ def load_data(path) -> pd.DataFrame:
     df = pd.read_csv(path)
     return df
 
-#Preprocessing steps for the dataset
-def preprocessor() -> ColumnTransformer:
+# Feature and target column definitions
+TARGET_COL = 'Exited'
 
-    target_col = 'Exited'
+CATEGORICAL_COLS = [
+    'Geography', 
+    'Gender', 
+    'Card Type'
+]
 
-    cate_cols = [
-        'Geography', 
-        'Gender', 
-        'Card Type'
-    ]
-
-    num_cols = [
+NUMERICAL_COLS = [
     'CreditScore', 
     'Age', 
     'Tenure', 
@@ -33,8 +31,15 @@ def preprocessor() -> ColumnTransformer:
     'Complain', 
     'Satisfaction Score', 
     'Point Earned'
-    ]
+]
 
+# Aliases for backwards compatibility and lowercase naming conventions
+target_col = TARGET_COL
+cate_cols = CATEGORICAL_COLS
+num_cols = NUMERICAL_COLS
+
+# Preprocessing steps for the dataset
+def preprocessor() -> ColumnTransformer:
     num_pipeline = Pipeline([
         ('imputer', SimpleImputer(strategy='median')),
         ('scaler', StandardScaler())
@@ -46,6 +51,6 @@ def preprocessor() -> ColumnTransformer:
     ])
 
     return ColumnTransformer([
-        ('nums', num_pipeline, num_cols),
-        ('cate', cate_pipeline, cate_cols)
-    ])
+        ('nums', num_pipeline, NUMERICAL_COLS),
+        ('cate', cate_pipeline, CATEGORICAL_COLS)
+    ])
