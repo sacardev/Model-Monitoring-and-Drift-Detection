@@ -1,8 +1,8 @@
 from functools import lru_cache
-import pandas as pd 
+import pandas as pd
 import joblib
 
-from ..data_prep import NUMERICAL_COLS, CATEGORICAL_COLS
+from ..data_prep import num_cols, cate_cols
 from ..drift.detector import DriftDetector
 from .config import PIPELINE_PATH, REFERENCE_DATA_PATH
 
@@ -16,4 +16,4 @@ def get_reference_data() -> pd.DataFrame:
 
 @lru_cache(maxsize=1)
 def get_drift_detector() -> DriftDetector:
-    return DriftDetector(NUMERICAL_COLS, CATEGORICAL_COLS)
+    return DriftDetector(num_cols, cate_cols)
