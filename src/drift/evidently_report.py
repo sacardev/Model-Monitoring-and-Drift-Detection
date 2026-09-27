@@ -11,14 +11,14 @@ if not hasattr(np, "int_"):
     np.int_ = np.int64
 
 try:
-    from evidently.report import Report
-except ImportError:
     from evidently import Report
+except ImportError:
+    from evidently.report import Report  # type: ignore[import-not-found]
 
 try:
-    from evidently.metric_preset import DataDriftPreset
-except ImportError:
     from evidently.presets import DataDriftPreset
+except ImportError:
+    from evidently.metric_preset import DataDriftPreset  # type: ignore[import-not-found]
 
 
 def generate_drift_report(
