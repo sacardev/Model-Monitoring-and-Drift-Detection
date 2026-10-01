@@ -19,7 +19,7 @@ def predict(payload: PredictRequest, db: Session = Depends(get_db), pipeline = D
     prediction = (probablities >= 0.5).astype(int)
     
     logs = [
-        PredictionLog(feature = record, prediction = int(pred), probability = float(prob))
+        PredictionLog(features=record, prediction=int(pred), probability=float(prob))
         for record, pred, prob in zip(records, prediction, probablities)
     ]
 
